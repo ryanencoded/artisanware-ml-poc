@@ -15,7 +15,7 @@ clean:
 	rm -rf $(MODEL_DIR)
 
 start-ai-app:
-	uvicorn src.services.ai:app --reload
+	uvicorn src.ai.routes:app --reload
 
 model-files:
 	mkdir -p $(MODEL_DIR)
