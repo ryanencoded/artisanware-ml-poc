@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from .models import GenerateRequest
-from .cpu import generate_with_gpt, generate_with_flan
-from .gpu import generate_with_gpu
+from .services.gpt import generate_with_gpt
+from .services.flan import generate_with_flan
+from .services.gpu import generate_with_gpu
 
-app = FastAPI(title="AI Microservice", version="0.3.0")
+app = FastAPI(title="AI Microservice", version="0.4.0")
 
 @app.get("/")
 def health_check():
@@ -21,7 +22,3 @@ def generate_text(req: GenerateRequest):
         return {"error": "Invalid model. Use 'gpt', 'flan', or 'gpu'."}
 
     return {"generated_text": text}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("src.ai.routes:app", host="127.0.0.1", port=8000, reload=True)
