@@ -3,9 +3,9 @@ VENV=.venv
 MODEL_NAME=flan-t5-base         # short name only
 MODEL_HF_ID=google/flan-t5-base # full Hugging Face repo id
 MODEL_TASK=text2text-generation
-MODEL_DIR=models/$(MODEL_NAME)
-ONNX_RAW_DIR=$(MODEL_DIR)/onnx-raw
-ONNX_DIR=$(MODEL_DIR)/onnx
+MODEL_DIR="models/$(MODEL_NAME)"
+ONNX_RAW_DIR="$(MODEL_DIR)/onnx-raw"
+ONNX_DIR="$(MODEL_DIR)/onnx"
 
 setup:
 	$(PYTHON) -m venv $(VENV)
@@ -13,6 +13,9 @@ setup:
 
 clean:
 	rm -rf $(MODEL_DIR)
+
+start-ai-app:
+	uvicorn src.services.ai:app --reload
 
 model-files:
 	mkdir -p $(MODEL_DIR)
@@ -45,4 +48,4 @@ env-file:
 	@echo "MODEL_TASK=$(MODEL_TASK)" >> .env
 	@echo "MODEL_DIR=$(MODEL_DIR)" >> .env
 
-model-prepare: clean model-export model-quantize model-files env-file
+model-prepare: clean model-export model-quantize model-files
