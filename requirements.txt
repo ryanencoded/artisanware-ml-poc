@@ -1,7 +1,12 @@
 numpy<2
+# Hugging Face
 transformers==4.53.3
-optimum[onnxruntime]==1.22.0
+optimum[onnxruntime]
 onnxruntime==1.19.0
 fastapi
 uvicorn[standard]
 python-dotenv
+# PyTorch with MPS (works on Mac M1/M2/M3)
+torch
+torchvision
+torchaudio
